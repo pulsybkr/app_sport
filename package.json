@@ -1,0 +1,19 @@
+{
+	"scripts": {
+		"build": "concurrently \"tsc --watch\" \"postcss src/styles.css -o public/styles.css --watch\"",
+		"start": "live-server public"
+	},
+	"devDependencies": {
+		"@types/node": "^22.6.1",
+		"autoprefixer": "^10.4.20",
+		"concurrently": "^9.0.1",
+		"live-server": "^1.2.2",
+		"postcss": "^8.4.47",
+		"postcss-cli": "^11.0.0",
+		"tailwindcss": "^3.4.13",
+		"typescript": "^5.6.2"
+	},
+	"dependencies": {
+		"undici": "^6.19.8"
+	}
+}
