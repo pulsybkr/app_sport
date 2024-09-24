@@ -1,6 +1,6 @@
 {
 	"scripts": {
-		"build": "concurrently \"tsc --watch\" \"postcss src/styles.css -o public/styles.css --watch\"",
+		"build": "concurrently \"tsc --watch\" \"npx tailwindcss -i ./public/style/input.css -o ./public/style/style.css --watch\"",
 		"start": "live-server public"
 	},
 	"devDependencies": {
