@@ -1,26 +1,57 @@
-// // index.ts
-// const routes: { [key: string]: () => string } = {
-//     '/': () => '<h1>Bienvenue sur la page d\'accueil</h1>',
-//     '/about': () => '<h1>À Propos de nous</h1>',
-// };
+// Gestionnaire des routes
+const routes: { [key: string]: string } = {
+    '/': 'index.html',
+    '/about': 'about.html',
+    '/login': 'login.html'
+};
 
-// function navigate(event: MouseEvent, path: string) {
-//     event.preventDefault();
-//     history.pushState({}, '', path);
-//     render(path);
-// }
+// Fonction pour charger le contenu d'une page HTML
+function loadPage(url: string): void {
+    fetch(url)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Page non trouvée');
+            }
+            return response.text();
+        })
+        .then(html => {
+            const appElement = document.getElementById('app');
+            if (appElement) {
+                appElement.innerHTML = html;
+            }
+        })
+        .catch(error => {
+            const appElement = document.getElementById('app');
+            if (appElement) {
+                appElement.innerHTML = `<h1>Erreur: ${error.message}</h1>`;
+            }
+        });
+}
 
-// function render(path: string) {
-//     const content = document.getElementById('content');
-//     if (content) {
-//         content.innerHTML = routes[path] ? routes[path]() : '<h1>404 - Page non trouvée</h1>';
-//     }
-// }
+// Fonction pour naviguer et charger les routes
+function navigateTo(url: string): void {
+    history.pushState(null, '', url);  // Change l'URL sans recharger la page
+    updateContent();  // Met à jour le contenu
+}
 
-// // Écouter les changements d'historique
-// window.onpopstate = () => {
-//     render(location.pathname);
-// };
+// Fonction pour mettre à jour le contenu de la page
+function updateContent(): void {
+    const path = window.location.pathname;
+    const route = routes[path] || '404.html';  // Si la route n'existe pas, affiche une page 404
+    loadPage(route);
+}
 
-// // Initialiser le rendu
-// render(location.pathname);
+// Gestion de l'événement de clic sur les liens
+document.addEventListener('click', (e: MouseEvent) => {
+    const target = e.target as HTMLElement;
+    if (target.matches('[data-link]')) {
+        e.preventDefault();
+        navigateTo(target instanceof HTMLAnchorElement ? target.href : '');  // Empêche le chargement de la page et appelle navigateTo
+    }
+});
+
+// Gestion du retour en arrière/avant dans le navigateur
+window.addEventListener('popstate', updateContent);
+
+// Chargement initial de la page
+document.addEventListener('DOMContentLoaded', updateContent);

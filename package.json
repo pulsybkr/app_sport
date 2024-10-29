@@ -1,7 +1,7 @@
 {
 	"scripts": {
 		"build": "concurrently \"tsc --watch\" \"npx tailwindcss -i ./public/style/input.css -o ./public/style/style.css --watch\"",
-		"start": "live-server public"
+		"start": "live-server public --mount=/dist:./dist"
 	},
 	"devDependencies": {
 		"@types/node": "^22.6.1",
