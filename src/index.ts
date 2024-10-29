@@ -24,3 +24,21 @@
 
 // // Initialiser le rendu
 // render(location.pathname);
+
+// index.ts
+
+// index.ts
+// index.ts
+
+document.addEventListener('DOMContentLoaded', () => {
+    const startButton = document.getElementById('start-button') as HTMLButtonElement;
+
+    if (startButton) {
+        startButton.addEventListener('click', () => {
+            console.log('Le bouton "Commencer" a été cliqué !');
+            alert('Bouton cliqué !');
+        });
+    } else {
+        console.error('Le bouton "Commencer" n\'a pas été trouvé.');
+    }
+});

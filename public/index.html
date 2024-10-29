@@ -3,19 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Page principale</title>
+    <title>Accueil</title>
     <link href="style/style.css" rel="stylesheet">
+   
+    <!-- <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"> -->
 </head>
-<body class="bg-dark-50 text-center">
+<body class="bg-gray-100">
 
-    <h1 class="text-3xl font-bold underline">
-        Hello world!
-      </h1>
-      
-    <h1 class="text-4xl font-bold text-green-600">Page principale</h1>
-    <p class="mt-4 text-lg text-gray-700">Bienvenue sur la page principale de votre application TypeScript et Tailwind CSS.</p>
-    <a href="about.html" class="mt-6 px-4 py-2 bg-green-500 text-white rounded hover:bg-green-700">Accéder à la page À propos</a>
+   
+    <header class="bg-white p-4 shadow-md flex justify-between items-center">
+        <div class="logo">
+            <img src="logo.png" alt="Logo" class="w-12">
+        </div>
+        <nav class="space-x-4">
+            <a href="#" class="text-gray-800 font-semibold">Home</a>
+            <a href="#" class="text-gray-800 font-semibold">About us</a>
+            <a href="#" class="text-gray-800 font-semibold">Pages</a>
+            <a href="#" class="text-gray-800 font-semibold">Contact us</a>
+        </nav>
+        <div class="flex space-x-2">
+            <button class="border border-gray-800 px-4 py-2 font-semibold">SIGN IN</button>
+            <button class="bg-gray-800 text-white px-4 py-2 font-semibold">SIGN UP</button>
+        </div>
+    </header>
 
-    <script type="module" src="../dist/index.js"></script>
+   
+    <main class="flex items-center justify-between p-10">
+        <div class="text-content max-w-lg">
+            <h1 class="text-4xl font-bold mb-4">Together, we run</h1>
+            <p class="text-lg mb-6">Le Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en page avant impression.</p>
+            <button id="start-button" class="bg-black text-white px-5 py-2 font-bold">Commencer</button>
+        </div>
+        <div class="image-container border-4 border-blue-500">
+            <img src="/src/images/image.png" alt="Image" class="w-full h-auto">
+        </div>
+    </main>
+
+   
+     <script type="module" src="../dist/index.js"></script>
 </body>
 </html>
