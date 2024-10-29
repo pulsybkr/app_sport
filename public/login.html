@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link href="style/style.css" rel="stylesheet">
+</head>
+
+<body class="bg-dark-50 text-center">
+
+    <main class="flex flex-col justify-between items-center h-screen p-8">
+        <header class="flex w-full justify-between p-4">
+            <div>
+                <p class="text-xl font-bold">logo.</p>
+            </div>
+        </header>
+        <section class="flex w-full justify-between items-center h-full">
+            <div class="flex w-1/2 justify-center flex-col items-start">
+                <h1 class="text-3xl font-bold mb-10">Login</h1>
+                <p class="text-sm mb-10">Don't have an account ? <a class="text-blue-500"
+                        href="register.html">Register</a>
+                </p>
+                <form action="" class="w-80">
+                    <div class="flex flex-col w-full items-start mb-4">
+                        <label class="text-sm mb-1" for="email">Email</label>
+                        <input class="w-full border-2 border-gray-900 rounded-md p-2" type="email" id="email"
+                            name="email" placeholder="john.doe@example.com">
+                    </div>
+                    <div class="flex flex-col items-start mb-4">
+                        <label class="text-sm mb-1" for="password">Password</label>
+                        <input class="w-full border-2 border-gray-900 rounded-md p-2" type="password" id="password"
+                            name="password" placeholder="********">
+                    </div>
+                    <div>
+                        <button class="bg-gray-900 text-white rounded-md pt-2 pb-2 pl-4 pr-4">Register</button>
+                    </div>
+                </form>
+            </div>
+            <div class="pl-8 rounded-lg w-full h-[80vh] p-4">
+                <img class="w-full rounded-lg h-full object-cover" src="image/bg_login.jpg" alt="Register">
+            </div>
+            <div>
+
+            </div>
+        </section>
+    </main>
+
+
+</body>
+
+</html>
