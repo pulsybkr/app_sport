@@ -7,12 +7,12 @@
     <title>Accueil</title>
     <link href="style/style.css" rel="stylesheet">
    
-    <!-- <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"> -->
+    
 </head>
 
 <body class="bg-gray-100">
 
-   
+
     <header class="bg-white p-4 shadow-md flex justify-between items-center">
         <div class="logo">
             <img src="logo.png" alt="Logo" class="w-12">
@@ -24,20 +24,21 @@
             <a href="#" class="text-gray-800 font-semibold">Contact us</a>
         </nav>
         <div class="flex space-x-2">
-            <button class="border border-gray-800 px-4 py-2 font-semibold">SIGN IN</button>
-            <button class="bg-gray-800 text-white px-4 py-2 font-semibold">SIGN UP</button>
+            <button class="border border-gray-800 px-4 py-2 font-semibold" onclick="window.location.href='login.html'">SIGN IN</button>
+            <button class="bg-gray-800 text-white px-4 py-2 font-semibold" onclick="window.location.href='register.html'">SIGN UP</button>
         </div>
     </header>
 
 
    
-    <main class="flex items-center justify-between p-10">
+    <main class="flex flex-col justify-between items-center h-screen p-8">
+        
         <div class="text-content max-w-lg">
             <h1 class="text-4xl font-bold mb-4">Together, we run</h1>
             <p class="text-lg mb-6">Le Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en page avant impression.</p>
             <button id="start-button" class="bg-black text-white px-5 py-2 font-bold">Commencer</button>
         </div>
-        <div class="image-container border-4 border-blue-500">
+        <div class="flex w-full justify-between items-center h-full">
             <img src="image/image.png" alt="Image" class="w-full h-auto">
         </div>
     </main>
