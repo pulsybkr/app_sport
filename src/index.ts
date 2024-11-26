@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // Gestionnaire des routes
 const routes: { [key: string]: string } = {
     '/': 'index.html',
@@ -56,3 +57,6 @@ window.addEventListener('popstate', updateContent);
 
 // Chargement initial de la page
 document.addEventListener('DOMContentLoaded', updateContent);
+=======
+console.log('index.ts');
+>>>>>>> dev_pulsy
