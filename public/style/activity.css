@@ -1,0 +1,352 @@
+/* Style global */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f7fb;
+    color: #333;
+    display: flexbox;
+}
+
+/* Container principal */
+.container {
+    display: flex;
+    min-height: 100vh;
+
+    h2 {
+        font-weight: bold;
+    }
+}
+
+/* Sidebar */
+.sidebar {
+    background-color: #2c3e50;
+    color: #fff;
+    width: 180px;
+    padding: 20px;
+    box-shadow: 4px 0 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.sidebar .logo {
+    text-align: left;
+    text-transform: uppercase;
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 30px;
+}
+
+.sidebar .selected {
+    background-color: #34495e;
+    color: white;
+}
+
+.sidebar ul {
+    padding: 0;
+    list-style: none;
+}
+
+.sidebar ul li {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    border-radius: 5px;
+}
+
+.sidebar ul li:hover {
+    background-color: #34495e;
+}
+
+.sidebar ul li svg {
+    margin-right: 15px;
+}
+
+/* Contenu */
+.content {
+    flex-grow: 1;
+    padding: 20px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+/* Section Activité en cours */
+.current-activity {
+    width: 105%;
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+    margin-bottom: 2rem;
+  }
+  
+  .current-activity h1 {
+    font-size: 18px;
+    font-weight: bold;
+    text-align: left;
+    margin-bottom: 15px;
+    color: #333;
+  }
+  
+  /* Carte de la section */
+  .map {
+    width: 100%;
+    height: 450px;
+    background-color: #e0e0e0;
+    border-radius: 8px;
+    margin-bottom: 20px;
+  }
+
+  /* Info Météo */
+#weather-info {
+    background: #333;
+    color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+
+    .weather-informations {
+        padding: 1rem;
+        display: flex;
+        gap: 3rem;
+    }
+
+    .weather-title {
+        font-size: 18px;
+        font-weight: bolder;
+        text-align: left;
+    }
+}
+  
+  /* Section Live Stats */
+  .live-stats {
+    display: flex;
+    flex-wrap: wrap; /* Permet de passer à la ligne si nécessaire */
+    gap: 20px; /* Espacement entre les éléments */
+    padding: 0;
+    list-style: none;
+    margin: 0;
+  }
+  
+  .live-stats .stat {
+    flex: 1 1 calc(20% - 20px); /* 20% de la largeur avec une marge */
+    min-width: 150px; /* Largeur minimale pour un bon affichage */
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    font-weight: 600;
+    color: dimgray;
+    display: flex;
+    flex-direction: column; /* Alignement vertical des éléments */
+    justify-content: space-between;
+    align-items: left;
+    text-align: left;
+  }
+  
+  .live-stats .stat span {
+    font-weight: bold;
+    font-size: 1.8em;
+    color: dodgerblue;
+  }
+
+  #activityInfos {
+    display: flex;
+    justify-content: center; /* Centrer horizontalement les éléments */
+    align-items: right;     /* Centrer verticalement les éléments */
+    gap: 2rem;               /* Espace entre les éléments */
+    margin: 2rem auto;       /* Centrer le container et ajouter de l'espace autour */
+    font-weight: 600;        /* Texte en gras */
+    width: 100%;              /* Limiter la largeur pour que l'élément ne prenne pas toute la largeur */
+    max-width: auto;       /* Limiter à une largeur maximale */
+    text-align: center;      /* Centrer le texte à l'intérieur des éléments */
+}
+
+.act-info {
+    margin-top: -1rem;
+    display: flex;
+    flex-direction: column;  /* Empiler le texte verticalement */
+    justify-content: right; /* Centrer le texte */
+    align-items: right;     /* Centrer le texte */
+    padding: 1rem;           /* Ajouter de l'espace autour de chaque élément */
+    border-radius: 8px;      /* Coins arrondis pour un effet plus doux */
+    background-color: #fff; /* Fond légèrement gris pour chaque info */
+    width: 100%;             /* Prendre toute la largeur disponible de son conteneur */
+    max-width: 200px;        /* Limiter la largeur de chaque info */
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); /* Ombre douce autour des éléments */
+}
+
+.act-info span {
+    margin: 0.5rem 0; /* Espacement entre les éléments de texte */
+    color: #333;      /* Couleur du texte */
+}
+
+  
+  
+  /* Section Historique */
+  .activity-history {
+    padding: 15px;
+    width: 105%;
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .activity-history h2 {
+    margin: 0;
+    font-size: 1.3rem;
+    color: #333;
+    border-bottom: 2px solid #4caf50;
+    padding-bottom: 5px;
+  }
+  
+  .activity-history ul {
+    margin: 10px 0 0;
+    padding: 0;
+    list-style: none;
+  }
+  
+  .activity-history li {
+    padding: 8px 10px;
+    border-bottom: 1px solid #eee;
+    color: #555;
+    font-size: 1rem;
+  }
+  
+  .activity-history li:last-child {
+    border-bottom: none;
+  }
+
+/* Ajouter un style pour la popup*/
+/* Style général de la popup */
+.popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7); /* Fond sombre */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* S'assurer que la popup soit au-dessus de tout */
+    opacity: 0; /* Commence invisible */
+    pointer-events: none; /* Evite les interactions avant l'animation */
+    transition: opacity 0.3s ease, pointer-events 0.3s ease;
+    font-weight: 600;
+
+    h2 {
+        margin-bottom: 2rem;
+        color: dodgerblue;
+        font-size: 20px;
+    }
+}
+
+/* Quand la popup est visible */
+.popup.show {
+    opacity: 1;
+    pointer-events: all; /* Permet les interactions */
+    display: flex; /* Affichage en flex */
+}
+
+/* Contenu de la popup sans animation */
+.popup-content {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    width: 600px;
+    max-width: 90%; /* Limite la largeur pour les petits écrans */
+}
+/* Animation de la popup */
+@keyframes popupScale {
+    0% {
+        transform: scale(0.8); /* Début à une taille plus petite */
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1); /* Grandit à sa taille normale */
+        opacity: 1;
+    }
+}
+
+/* Style pour le bouton de nouvelle activité */
+#newActivityBtn {
+    background-color: #1e88e5;
+    color: #fff;
+    padding: 12px 20px;
+    border-radius: 10px;
+    font-size: 16px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    border: none;
+    margin-bottom: 1.5rem;
+}
+
+#newActivityBtn:hover {
+    background-color: #1565c0; /* Couleur au survol */
+    transform: translateY(-2px); /* Légère élévation */
+}
+
+#newActivityBtn:active {
+    transform: translateY(2px); /* Effet de pression */
+}
+
+/* Style des champs du formulaire */
+#activityForm input, #activityForm select {
+    width: 100%;
+    padding: 12px;
+    margin: 12px 0;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    transition: border-color 0.3s;
+}
+
+/* Focus sur les champs du formulaire */
+#activityForm input:focus, #activityForm select:focus {
+    border-color: #1e88e5;
+    outline: none;
+}
+
+/* Bouton d'annulation ou fermeture de la popup */
+#closePopupBtn {
+    background-color: transparent;
+    color: #999;
+    border: none;
+    font-size: 18px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+#closePopupBtn:hover {
+    color: #e53935; /* Rouge au survol */
+}
+
+/* Animation de fermeture de la popup */
+.popup.hide {
+    opacity: 0;
+    pointer-events: none; /* Evite les interactions */
+}
+
+/* Ajouter un léger flou à l'arrière-plan lorsque la popup est ouverte */
+.popup.show ~ body {
+    filter: blur(4px);
+    transition: filter 0.3s ease;
+}

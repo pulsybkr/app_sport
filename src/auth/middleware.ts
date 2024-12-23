@@ -23,3 +23,4 @@ const checkUserLoggedIn = async () => {
 if (isChecking) {
     main?.classList.remove('hidden');
 }
+

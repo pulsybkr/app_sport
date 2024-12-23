@@ -4,10 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
+    <title>Activity</title>
     <link href="style/style.css" rel="stylesheet">
-    <link href="style/dashboard.css" rel="stylesheet">
-
+    <link href="style/activity.css" rel="stylesheet">
 </head>
 
 <body>
@@ -17,7 +16,7 @@
         <div class="sidebar">
             <div class="logo">Weather APP</div>
             <ul>
-                <li class="selected">
+                <li>
                     <svg width="24" height="24" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" clip-rule="evenodd"
                             d="M7 10H1C0.45 10 0 9.55 0 9V1C0 0.45 0.45 0 1 0H7C7.55 0 8 0.45 8 1V9C8 9.55 7.55 10 7 10ZM7 18H1C0.45 18 0 17.55 0 17V13C0 12.45 0.45 12 1 12H7C7.55 12 8 12.45 8 13V17C8 17.55 7.55 18 7 18ZM11 18H17C17.55 18 18 17.55 18 17V9C18 8.45 17.55 8 17 8H11C10.45 8 10 8.45 10 9V17C10 17.55 10.45 18 11 18ZM10 5V1C10 0.45 10.45 0 11 0H17C17.55 0 18 0.45 18 1V5C18 5.55 17.55 6 17 6H11C10.45 6 10 5.55 10 5Z"
@@ -29,7 +28,7 @@
                         </a>
                     </p>
                 </li>
-                <li>
+                <li class="selected">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" clip-rule="evenodd"
                             d="M7.4091 8.29186L12.9491 2.75186C13.5291 2.16186 14.4691 2.16186 15.0591 2.74186C15.4191 3.10186 15.5691 3.61186 15.4691 4.11186L14.5191 8.69186H20.1691C22.3191 8.69186 23.7691 10.8919 22.9291 12.8719L19.6691 20.4819C19.3491 21.2119 18.6291 21.6919 17.8291 21.6919H8.8291C7.7291 21.6919 6.8291 20.7919 6.8291 19.6919V9.70186C6.8291 9.17186 7.0391 8.66186 7.4091 8.29186ZM4.8291 19.6919C4.8291 20.7919 3.9291 21.6919 2.8291 21.6919C1.7291 21.6919 0.829102 20.7919 0.829102 19.6919V11.6919C0.829102 10.5919 1.7291 9.69186 2.8291 9.69186C3.9291 9.69186 4.8291 10.5919 4.8291 11.6919V19.6919Z"
@@ -68,79 +67,94 @@
             </ul>
         </div>
 
-        <!-- Contenu principal -->
         <div class="content">
-            <div class="header">
-                <h2>Bienvenue sur le Dashboard</h2>
+            <!-- Section Activité en cours -->
+            <div class="current-activity">
+                <h1>Activité en cours</h1>
+                <div id="map" class="map"></div>
+                <div id="activityInfos">
+                    <p class="act-info" id="actDistance">
+                       <span> Distance totale</span>
+                        <span id="actData-Distance"></span>
+                    </p>
+                    <p class="act-info" id="actDuration">
+                        <span> Durée totale </span>
+                        <span id="actData-Duration"></span>
+                    </p>
+                    <p class="act-info" id="actTravelWay">
+                        <span> Moyen recommandé </span>
+                        <span id="actData-TravelWay"></span>
+                    </p>
+
+                    <p class="act-info" id="actTravelWay">
+                        <span> Température </span>
+                        <span id="actData-temp"></span>
+                    </p>
+                </div>
+
+                <input type="button" id="newActivityBtn" value="Nouvelle activité">
+
+                <!-- Popup (initialement masquée) -->
+                <div id="activityFormPopup" class="popup">
+                    <div class="popup-content">
+                        <h2>Démarrer une nouvelle activité</h2>
+                        <form id="activityForm">
+                            <label for="start">Point de départ:</label>
+                            <input type="text" id="start" placeholder="Entrez votre point de départ">
+                            <label for="end">Point d'arrivée:</label>
+                            <input type="text" id="end" placeholder="Entrez votre point d'arrivée">
+                            <label for="transport">Moyen de transport:</label>
+                            <select id="transport">
+                                <option value="walking">Marche</option>
+                                <option value="bicycling">Vélo</option>
+                                <option value="driving">Voiture</option>
+                            </select>
+                            <button type="submit">Lancer l'activité</button>
+                            <button type="button" id="closePopupBtn">Fermer</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="live-stats">
+                    <div class="stat">Distance parcourue: <span id="distance">0 km</span></div>
+                    <div class="stat">Durée restante estimée: <span id="duration">0:00</span></div>
+                    <div class="stat">Vitesse de déplacement: <span id="speed">0 km/h</span></div>
+                </div>
+                <div id="weather-info">
+
+                </div>
             </div>
 
-            <div class="dashboard-sections">
-                <!-- Récapitulatif du jour -->
-                <div class="recapitulatif">
-                    <h3>Récapitulatif du jour</h3>
-                    <ul class="recap-list">
-                        <li class="recap-element">
-                            <span class="recap-title">Distance parcourue:</span>
-                            <span class="recap-element-data" id="distance">0 km</span>
-                        </li>
-                        <li class="recap-element">
-                            <span class="recap-title">Durée totale:</span>
-                            <span class="recap-element-data" id="duration">0 min</span>
-                        </li>
-                        <li class="recap-element">
-                            <span class="recap-title">Vitesse moyenne:</span>
-                            <span class="recap-element-data" id="avgSpeed">0 km/h</span>
-                        </li>
-                        <li class="recap-element">
-                            <span class="recap-title">Vitesse max:</span>
-                            <span class="recap-element-data" id="maxSpeed">0 km/h</span>
-                        </li>
-                        <li class="recap-element">
-                            <span class="recap-title">Calories brûlées:</span>
-                            <span class="recap-element-data" id="calories">0 kcal</span>
-                        </li>
-                    </ul>
-                </div>
-                
-
-                <!-- Évolution des performances -->
-                <div class="evolution-objectifs">
-                    <div class="evolution">
-                        <h3>Objectifs et Evolution</h3>
-                        <div id="performanceGraph">Graphique ici</div>
-                    </div>
-
-                    <div class="objectifs">
-                        <h3>Prévu aujourd'hui</h3>
-                        <div id="goals">Objectifs ici</div>
-                    </div>
-                </div>
-
-
-                <!-- Historique des activités -->
-                <div class="historique">
-                    <h3>Historique des activités</h3>
-                    <div id="activityHistory">Activités récentes ici</div>
-                </div>
+            <!-- Section Historique -->
+            <div class="activity-history">
+                <h2>Historique des activités</h2>
+                <ul id="history-list">
+                    <li>Aucune activité pour le moment.</li>
+                </ul>
             </div>
         </div>
     </div>
 
-    <!--
-        <script>
-        // Script pour initialiser la carte Leaflet
-        var map = L.map('map').setView([51.505, -0.09], 13); // Position initiale (latitude, longitude)
-
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-        }).addTo(map);
-
-        // Ajout d'un marqueur par défaut
-        L.marker([51.5, -0.09]).addTo(map)
-            .bindPopup('Ici !')
-            .openPopup();
+    <script 
+        async 
+        defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBvabPtiVq3uaDKmxJXTK7T6K2yXUMDK1g&libraries=geometry,places&async1&&callback=initMap">
     </script>
-    -->
+
+    <script
+        async
+        defer
+        type="module"
+        src="./dist/auth/map.js"
+    >
+    </script>
+
+    <script
+        async
+        defer
+        type="module"
+        src="./dist/auth/weather.js"
+    ></script>
+
 </body>
 
 </html>
