@@ -1,0 +1,33 @@
+<header class="p-16">
+    <h2 class="text-2xl font-bold">WeatherApp</h2>
+</header>
+<main class="flex h-[80vh] items-center justify-between space-x-16 p-16">
+    <section>
+        <h1 class="text-4xl font-bold mb-16">Connexion</h1>
+        <p class="mb-8">Si vous n'avez pas de compte, <a class="text-blue-500 font-bold" href="/register">créez un compte</a></p>
+        <form class="flex flex-col space-y-4" id="loginForm">
+            <div class="flex flex-col space-y-2">
+                <label for="email" class="text-gray-800">Email</label>
+                <input type="email" id="email" name="email" class="border-gray-300 border-solid border-2 rounded-md px-4 py-2">
+            </div>
+           
+            <div class="flex flex-col space-y-2">
+                <label for="password" class="text-gray-800">Mot de passe</label>
+                <input type="password" id="password" name="password" class="border-gray-300 border-solid border-2 rounded-md px-4 py-2">
+            </div>
+            <div class="flex justify-center mt-16">
+                <button type="submit" class="bg-blue-500 text-white font-bold rounded-md px-4 py-2">Connexion</button>
+            </div>
+        </form>
+    </section>
+
+    <section class="w-[50vw] h-[70vh]">
+        <div class="w-full h-full">
+            <img class="w-full h-full rounded-2xl object-cover" src="./image/bg_login.jpg" alt="run">
+        </div>
+    </section>
+</main>
+
+
+<!-- <script src="../src/auth/login.js"></script>
+<script src="../dist/toast.js"></script> -->
