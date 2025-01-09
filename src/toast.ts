@@ -32,4 +32,4 @@ export function showToast(message: string, type: string) {
     }, 3000);
 }
 
-console.log('toast.ts');
+// console.log('toast.ts');

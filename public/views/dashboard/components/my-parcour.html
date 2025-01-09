@@ -1,0 +1,67 @@
+<section class="w-full">
+    <div id="parcours-list" class="flex flex-col mb-4">
+        <!-- En-tête du tableau -->
+        <div class="p-4 grid grid-cols-4 gap-4 rounded-t-lg font-bold">
+            <div>Nom</div>
+            <div>Date</div>
+            <div>Type</div>
+            <div>Distance</div>
+        </div>
+        
+        <!-- Template pour chaque parcours -->
+        <template id="parcours-item-template">
+            <div class="bg-white p-4 grid grid-cols-4 gap-4 border-b hover:bg-gray-50">
+                <h3 class="parcours-name"></h3>
+                <p class="parcours-type"></p>
+                <p class="parcours-distance"></p>
+                <!-- <div class="flex flex-col">
+                    <button class="bg-[#E6F285] text-black font-bold rounded-lg px-6 py-3">
+                        Modifier
+                    </button>
+                    <button class="bg-red-500 text-white font-bold rounded-lg px-6 py-3">
+                        Supprimer
+                    </button>
+                </div> -->
+            </div>
+        </template>
+    </div>
+    <button id="new-parcour" class="bg-[#E6F285] text-black font-bold rounded-lg px-6 py-3">
+        Nouveau parcours
+    </button>
+</section>
+
+<div id="modal-new-parcour" class="hidden z-40 fixed inset-0 bg-black bg-opacity-50 justify-center items-center">
+    <div class="bg-white p-6 rounded-lg w-[80vw] overflow-y-scroll md:w-[50vw] h-[80vh] md:h-[80vh]">
+        <h2 class="text-2xl font-bold mb-4">Nouveau parcours</h2>
+
+        <input type="text" id="name-parcour" class="p-2 w-52 border border-gray-300 rounded-lg mb-4" placeholder="Nom du parcours">
+        
+        <div id="map" class="w-full h-[400px] rounded-2xl"></div>
+
+        <div class="flex flex-col flex-start gap-2 mt-2 w-[100px]">
+            <label for="type-parcour" class="text-lg font-bold">Type de parcours</label>
+            <select id="type-parcour" class="p-2 w-52 border border-gray-300 rounded-lg mb-4">
+                <option value="course">Course à pied</option>
+                <option value="marche">Marche</option>
+                <option value="marathon">Marathon</option>
+                <option value="velo">Vélo</option>
+            </select>
+        </div>
+        
+        <div class="mt-2">
+            <p id="distance-parcours" class="text-lg font-bold"></p>
+            <button id="reset-parcours" class="bg-[#CFE1CA] text-black font-bold rounded-lg px-6 py-3 mt-2">
+                Réinitialiser le parcours
+            </button>
+        </div>
+
+        <div class="flex justify-end gap-2">
+            <button id="save-parcour" class="bg-[#E6F285] text-black font-bold rounded-lg px-6 py-3">
+                Enregistrer
+            </button>
+            <button id="close-parcour" class="bg-red-500 text-white font-bold rounded-lg px-6 py-3">
+                Fermer
+            </button>
+        </div>
+    </div>
+</div>

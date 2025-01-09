@@ -2,6 +2,8 @@ import { showToast } from "../toast.js";
 import { userService } from '../services/user.service.js';
 import { User } from '../services/function/types.js';
 import { PasswordService } from '../services/function/password.js';
+import { checkUserLoggedIn } from './login.js';
+
 document.getElementById('registerForm')?.addEventListener('submit', async function (event) {
     event.preventDefault();
     const emailElement = document.getElementById('email') as HTMLInputElement;
@@ -55,4 +57,11 @@ export async function handleRegister(user: User) {
     }
 } 
 
-console.log('login.ts');
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', async () => {
+        checkUserLoggedIn();
+    });
+} else {
+    checkUserLoggedIn();
+}
+

@@ -41,17 +41,23 @@ document.addEventListener('DOMContentLoaded', async () => {
     await checkUserLoggedIn();
 });
 
-const checkUserLoggedIn = async () => {
+export const checkUserLoggedIn = async () => {
     const userService = new UserService();
     const user = await userService.isUserLoggedIn();
     if (user) {
         window.location.href = '/dashboard';
+    } else {
+        console.log('user not logged in');
     }
 };
 
-document.querySelector('#loginButton')?.addEventListener('click', async function (event) {
-    event.preventDefault();
-    console.log('login');
-});
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', async () => {
+        checkUserLoggedIn();
+    });
+} else {
+    checkUserLoggedIn();
+}
+
 
 console.log('login.ts');

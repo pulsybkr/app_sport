@@ -2,7 +2,7 @@ import { DBConfig } from './types.js';
 
 export const dbConfig: DBConfig = {
     name: 'UserDatabase',
-    version: 1,
+    version: 2,
     stores: [
         {
             name: 'users',
@@ -14,15 +14,27 @@ export const dbConfig: DBConfig = {
                     options: { unique: true }
                 }
             ]
+        },
+        {
+            name: 'activities',
+            keyPath: 'id',
+            indexes: [
+                {
+                    name: 'userId',
+                    keyPath: 'userId',
+                    options: { unique: false }
+                },
+                {
+                    name: 'date',
+                    keyPath: 'date',
+                    options: { unique: false }
+                },
+                {
+                    name: 'status',
+                    keyPath: 'status',
+                    options: { unique: false }
+                }
+            ]
         }
-        // Ajoutez d'autres stores ici au besoin
-        // Par exemple:
-        // {
-        //     name: 'products',
-        //     keyPath: 'id',
-        //     indexes: [
-        //         { name: 'name', keyPath: 'name' }
-        //     ]
-        // }
     ]
 }; 
