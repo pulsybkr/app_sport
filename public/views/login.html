@@ -1,11 +1,13 @@
-<header class="p-16">
-    <h2 class="text-2xl font-bold">WeatherApp</h2>
+<header class="p-4 md:p-9 absolute top-0 left-0">
+    <a href="/">
+        <h2 class="text-xl md:text-2xl font-bold">WeatherApp</h2>
+    </a>
 </header>
-<main class="flex h-[80vh] items-center justify-between space-x-16 p-16">
-    <section>
-        <h1 class="text-4xl font-bold mb-16">Connexion</h1>
-        <p class="mb-8">Si vous n'avez pas de compte, <a class="text-blue-500 font-bold" href="/register">créez un compte</a></p>
-        <form class="flex flex-col space-y-4" id="loginForm">
+<main class="flex flex-col md:flex-row min-h-screen items-center justify-between gap-4 md:gap-9 p-4 md:p-9">
+    <section class="w-full md:w-[450px] md:flex-shrink-0">
+        <h1 class="text-3xl md:text-4xl font-bold mb-6 md:mb-9">Connexion</h1>
+        <p class="mb-6 md:mb-8">Si vous n'avez pas de compte, <a class="text-blue-500 font-bold" href="/register">créez un compte</a></p>
+        <form class="flex flex-col w-full" id="loginForm">
             <div class="flex flex-col space-y-2">
                 <label for="email" class="text-gray-800">Email</label>
                 <input type="email" id="email" name="email" class="border-gray-300 border-solid border-2 rounded-md px-4 py-2">
@@ -21,7 +23,7 @@
         </form>
     </section>
 
-    <section class="w-[50vw] h-[70vh]">
+    <section class="hidden md:block flex-1 h-[70vh]">
         <div class="w-full h-full">
             <img class="w-full h-full rounded-2xl object-cover" src="./image/bg_login.jpg" alt="run">
         </div>

@@ -1,28 +1,28 @@
-<main class="h-screen z-0 ml-[175px] px-16 pt-4">
+<main class="min-h-screen z-0 pb-16 md:pb-0 md:ml-[175px] px-4 md:px-16 pt-4">
     <section class="w-full mt-4">
-        <div id="activity-header" class="flex justify-between items-center mb-8">
-            <h1 class="text-3xl font-bold">Activité en cours</h1>
-            <div class="flex gap-4">
-                <button id="start-activity" class="bg-green-500 text-white px-6 py-2 rounded-lg">
+        <div id="activity-header" class="flex flex-col md:flex-row justify-between items-start md:items-center mb-4 md:mb-8 gap-4">
+            <h1 class="text-2xl md:text-3xl font-bold">Activité en cours</h1>
+            <div class="flex gap-2 md:gap-4 w-full md:w-auto">
+                <button id="start-activity" class="bg-green-500 text-white px-4 md:px-6 py-2 rounded-lg flex-1 md:flex-none">
                     Démarrer
                 </button>
-                <button id="pause-activity" class="bg-yellow-500 text-white px-6 py-2 rounded-lg hidden">
+                <button id="pause-activity" class="bg-yellow-500 text-white px-4 md:px-6 py-2 rounded-lg hidden flex-1 md:flex-none">
                     Pause
                 </button>
-                <button id="stop-activity" class="bg-red-500 text-white px-6 py-2 rounded-lg hidden">
+                <button id="stop-activity" class="bg-red-500 text-white px-4 md:px-6 py-2 rounded-lg hidden flex-1 md:flex-none">
                     Arrêter
                 </button>
             </div>
         </div>
 
-        <div class="grid grid-cols-2 gap-8">
-            <div class="bg-white p-6 rounded-xl shadow-lg">
-                <div id="map" class="h-[400px] w-full rounded-lg"></div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8">
+            <div class="bg-white p-4 md:p-6 rounded-xl shadow-lg">
+                <div id="map" class="h-[300px] md:h-full w-full rounded-lg"></div>
             </div>
 
-            <div class="space-y-6">
-                <div class="bg-white p-6 rounded-xl shadow-lg">
-                    <h2 class="text-xl font-bold mb-4">Statistiques en temps réel</h2>
+            <div class="space-y-4 md:space-y-6">
+                <div class="bg-white p-4 md:p-6 rounded-xl shadow-lg">
+                    <h2 class="text-lg md:text-xl font-bold mb-4">Statistiques en temps réel</h2>
                     <div class="grid grid-cols-2 gap-4">
                         <div>
                             <p class="text-gray-600">Distance</p>
@@ -57,8 +57,8 @@
                     </div>
                 </div>
 
-                <div class="bg-white p-6 rounded-xl shadow-lg">
-                    <h2 class="text-xl font-bold mb-4">Informations du parcours</h2>
+                <div class="bg-white p-4 md:p-6 rounded-xl shadow-lg">
+                    <h2 class="text-lg md:text-xl font-bold mb-4">Informations du parcours</h2>
                     <div id="parcours-info" class="space-y-2">
                         <p id="parcours-name" class="text-lg font-semibold"></p>
                         <p id="parcours-distance" class="text-gray-600"></p>

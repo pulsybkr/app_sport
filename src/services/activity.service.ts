@@ -37,14 +37,14 @@ export class ActivityService extends DatabaseCore {
     }
 
     async createActivity(activityData: Partial<Activity>): Promise<Activity> {
-        const user = await userService.isUserLoggedIn();
-        if (!user) {
+        const user = await userService.getCurrentUser();
+        if (!user || !user.id) {
             throw new Error('Utilisateur non connecté');
         }
 
         const activity: Activity = {
             id: generateUUID(),
-            userId: await this.getCurrentUserId(),
+            userId: user.id || '',
             name: activityData.name || 'Nouvelle activité',
             type: activityData.type || 'unknown',
             parcoursId: activityData.parcoursId || '',

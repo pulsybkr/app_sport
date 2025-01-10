@@ -1,27 +1,62 @@
-export function setCookie(name: string, value: string | undefined, options: { secure?: boolean; expires?: number } = {}): void {
-    if (!value) {
-        throw new Error('La valeur du cookie ne peut pas être undefined');
+interface CookieOptions {
+    path?: string;
+    expires?: Date | number;
+    maxAge?: number;
+    domain?: string;
+    secure?: boolean;
+    sameSite?: 'strict' | 'lax' | 'none';
+}
+
+export function setCookie(name: string, value: string, options: CookieOptions = {}): void {
+    if (!name) throw new Error('Le nom du cookie est requis');
+    
+    let cookieString = `${encodeURIComponent(name)}=`;
+    
+    if (value !== '') {
+        cookieString += encodeURIComponent(value);
     }
-    console.log(value);
-    let cookieString = `${encodeURIComponent(name)}=${encodeURIComponent(value)}`;
+
     if (options.expires) {
-        const date = new Date();
-        date.setTime(date.getTime() + options.expires * 1000);
-        cookieString += `; expires=${date.toUTCString()}`;
+        if (typeof options.expires === 'number') {
+            options.expires = new Date(Date.now() + options.expires * 1000);
+        }
+        cookieString += `; expires=${options.expires.toUTCString()}`;
     }
+
+    if (options.maxAge) {
+        cookieString += `; max-age=${options.maxAge}`;
+    }
+
+    if (options.domain) {
+        cookieString += `; domain=${options.domain}`;
+    }
+
+    if (options.path) {
+        cookieString += `; path=${options.path}`;
+    }
+
     if (options.secure) {
         cookieString += '; secure';
     }
+
+    if (options.sameSite) {
+        cookieString += `; samesite=${options.sameSite}`;
+    }
+
     document.cookie = cookieString;
 }
 
-export function getCookie(name: string): string | undefined {
-    const cookieArr = document.cookie.split(';');
-    for (let i = 0; i < cookieArr.length; i++) {
-        const cookiePair = cookieArr[i].trim();
-        if (cookiePair.startsWith(`${encodeURIComponent(name)}=`)) {
-            return decodeURIComponent(cookiePair.split('=')[1]);
-        }
-    }
-    return undefined;
+export function getCookie(name: string): string | null {
+    if (!name) return null;
+    const matches = document.cookie.match(new RegExp(
+        "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
+    ));
+    return matches ? decodeURIComponent(matches[1]) : null;
+}
+
+export function deleteCookie(name: string): void {
+    setCookie(name, '', {
+        path: '/',
+        expires: new Date(0)
+    });
 }

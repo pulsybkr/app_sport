@@ -60,4 +60,40 @@ export class DatabaseCore {
             request.onerror = () => reject(request.error);
         });
     }
+
+    protected async add<T>(storeName: string, data: T): Promise<IDBValidKey> {
+        return this.executeTransaction<IDBValidKey>(storeName, 'readwrite', (store) => {
+            return store.add(data);
+        });
+    }
+
+    protected async update<T>(storeName: string, data: T): Promise<IDBValidKey> {
+        return this.executeTransaction<IDBValidKey>(storeName, 'readwrite', (store) => {
+            return store.put(data);
+        });
+    }
+
+    protected async get<T>(storeName: string, key: IDBValidKey): Promise<T | undefined> {
+        return this.executeTransaction<T>(storeName, 'readonly', (store) => {
+            return store.get(key);
+        });
+    }
+
+    protected async getAll<T>(storeName: string): Promise<T[]> {
+        return this.executeTransaction<T[]>(storeName, 'readonly', (store) => {
+            return store.getAll();
+        });
+    }
+
+    protected async delete(storeName: string, key: IDBValidKey): Promise<void> {
+        return this.executeTransaction<void>(storeName, 'readwrite', (store) => {
+            return store.delete(key);
+        });
+    }
+
+    protected async clear(storeName: string): Promise<void> {
+        return this.executeTransaction<void>(storeName, 'readwrite', (store) => {
+            return store.clear();
+        });
+    }
 } 

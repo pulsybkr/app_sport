@@ -6,6 +6,8 @@ export interface User {
     firstname: string;
     lastname: string;
     date_of_birth: string;
+    profile_picture?: string;
+    updatedAt?: number;
 }
 
 export interface DBStore {
@@ -23,3 +25,9 @@ export interface DBConfig {
     version: number;
     stores: DBStore[];
 } 
+
+export interface UpdateProfileData {
+    name?: string;
+    email?: string;
+    profileImage?: string;
+}

@@ -1,4 +1,3 @@
-// Fonction pour récupérer la météo
 
 async function getWeather(latitude: number, longitude: number) {
     const apiKey = "8b88011db31a2ab1d20e412898eff202"
@@ -18,8 +17,9 @@ async function getWeather(latitude: number, longitude: number) {
         if (currentWeatherElement) {
             currentWeatherElement.innerHTML = `
                 <div class="flex flex-col items-center">
-                    <h2 class="text-3xl font-bold">il fais</h2>
+                    <h3 class="font-bold">il fais</h3>
                     <h3 class="font-bold">actuellement</h3>
+
                     <h2 class="font-bold text-4xl">${Math.round(currentData.main.temp)}°C</h2>
                 </div>
             `;
@@ -39,7 +39,7 @@ async function getWeather(latitude: number, longitude: number) {
 
         // Afficher les prévisions dans le HTML
         const forecastHtml = dailyForecasts.map((forecast: any) => `
-            <div class="bg-[#CFE1CA] p-6 rounded-2xl flex flex-col items-center">
+            <div class="bg-[#CFE1CA] p-4 rounded-2xl flex flex-col items-center lg:flex-wrap">
                 <p class="font-semibold">${new Date(forecast.dt * 1000).toLocaleDateString('fr-FR', {
                     day: '2-digit',
                     month: '2-digit',
@@ -49,7 +49,7 @@ async function getWeather(latitude: number, longitude: number) {
                     <img src="https://openweathermap.org/img/wn/${forecast.weather[0].icon}@2x.png" 
                          alt="${forecast.weather[0].description}"
                          class="w-12 h-12">
-                    <div>
+                    <div class="flex gap-2 items-center">
                         <p class="text-sm">
                             Min: ${Math.round(forecast.main.temp_min)}°C
                         </p>
@@ -64,7 +64,7 @@ async function getWeather(latitude: number, longitude: number) {
         const forecastElement = document.getElementById('forecast');
         if (forecastElement) {
             forecastElement.innerHTML = `
-                <div class="">
+                <div class="flex flex-col justify-center h-full">
                     <h2 class="text-2xl font-bold mb-4">Méteo des prochains jours</h2>
                     <div class="grid grid-cols-4 gap-4">
                         ${forecastHtml}
@@ -77,7 +77,6 @@ async function getWeather(latitude: number, longitude: number) {
     }
 }
 
-// Exemple d'utilisation avec la géolocalisation
 navigator.geolocation.getCurrentPosition(
     (position) => {
         const { latitude, longitude } = position.coords;

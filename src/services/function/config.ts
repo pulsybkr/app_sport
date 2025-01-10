@@ -2,7 +2,7 @@ import { DBConfig } from './types.js';
 
 export const dbConfig: DBConfig = {
     name: 'UserDatabase',
-    version: 2,
+    version: 3,
     stores: [
         {
             name: 'users',

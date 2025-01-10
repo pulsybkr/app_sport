@@ -86,7 +86,24 @@ const initializeRoutes = async (): Promise<void> => {
     } catch (error) {
         console.error('Erreur lors du chargement de la page activity:', error);
     }
-});
+
+    
+  });
+
+router.addRoute('/profile', async () => {
+  try {
+    const content = await loadView('./views/dashboard/profile.html');
+    const header = await loadView('./views/dashboard/components/header.html');
+    document.getElementById('app')!.innerHTML = header + content;
+
+    await Promise.all([
+        loadPageScript('../dist/auth/middleware.js'),
+        loadPageScript('../dist/components/profile.js')
+    ]);
+  } catch (error) {
+    console.error('Erreur lors du chargement de la page profile:', error);
+    }
+  });
 };
 
 // Modifier la fonction loadPageScript pour retourner une Promise

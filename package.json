@@ -16,6 +16,7 @@
 	},
 	"dependencies": {
 		"@mobily/ts-belt": "^3.13.1",
+		"chart.js": "^4.4.7",
 		"dotenv": "^16.4.7",
 		"leaflet": "^1.9.4"
 	}

@@ -1,22 +1,21 @@
 <main class="h-screen z-0 ml-[175px]">
     <section class="w-full flex flex-col items-start">
         <div id="map" class="w-full h-[400px] z-0"></div>
-        <section class="flex items-center gap-8 mt-8 px-16">
+        <section class="flex items-center gap-8 mt-8 px-9">
             <div class="flex items-center gap-8 bg-[#CFE1CA] rounded-2xl p-4">
                 <div id="current-weather" class="pl-4"></div>
                 <div class="flex flex-col items-center bg-[#E6F285] rounded-2xl gap-2 p-6 font-bold">
-                    <p>Ce temps est idéal pour</p>
-                    <button class="bg-black text-[#E6F285] rounded-md w-full px-4 py-2">Commencer</button>
-                    <p>une activité sportive</p>
+                    <p>Ce temps est idéal pour <br>une activité sportive</p>
+                    <button class="bg-black text-[#E6F285] rounded-md w-full px-4 py-2"><a href="/activity">Commencer</a></button>
                 </div>
             </div>
-            <div id="forecast"></div>
+            <div id="forecast" class="flex-1 h-full"></div>
         </section>
-        <section class="px-16">
+        <section class="px-9 mt-12">
             <h2 class="text-2xl font-bold">Derniere activité</h2>
             <div id="last-activity"></div>
-            <button class="text-black bg-[#E6F285] font-bold rounded-lg px-6 py-3">
-                voir plus
+            <button class="bg-black text-[#E6F285] rounded-md w-full px-4 py-2 mt-4">
+                <a href="/activity">Voir plus</a>
             </button>
         </section>
     </section>

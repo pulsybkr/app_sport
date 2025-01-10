@@ -253,15 +253,12 @@ class ActivityTracking {
                 const currentTime = Date.now();
                 const deltaTime = (currentTime - this.lastSimulationTime) / 1000; // en secondes
                 
-                // Calculer la distance à parcourir pour ce pas de temps
                 const speed = this.WALKING_SPEED * this.simulationSpeed * 
-                    (0.8 + Math.random() * 0.4); // Variation aléatoire de ±20%
+                    (0.8 + Math.random() * 0.4); 
                 const distanceToMove = speed * deltaTime;
                 
-                // Calculer la distance totale entre les points
                 const totalDistance = this.calculateStepSize(currentPoint, nextPoint);
                 
-                // Calculer la nouvelle position
                 const remainingDistance = this.calculateStepSize(this.currentSimulatedPosition, nextPoint);
                 
                 if (remainingDistance <= distanceToMove) {
@@ -278,12 +275,11 @@ class ActivityTracking {
                     );
                 }
 
-                // Simuler une position GPS
                 const position = {
                     coords: {
                         latitude: this.currentSimulatedPosition[0],
                         longitude: this.currentSimulatedPosition[1],
-                        accuracy: 5 + Math.random() * 10, // Précision variable entre 5 et 15 mètres
+                        accuracy: 5 + Math.random() * 10,
                         altitude: null,
                         altitudeAccuracy: null,
                         heading: null,
@@ -295,7 +291,7 @@ class ActivityTracking {
                 this.handlePositionUpdate(position);
                 this.lastSimulationTime = currentTime;
 
-            }, 200); // Mise à jour plus fréquente pour un mouvement plus fluide
+            }, 200);
 
         } catch (error) {
             console.error('Erreur lors de la simulation:', error);
@@ -324,12 +320,10 @@ class ActivityTracking {
         this.tracking = true;
         this.updateButtonsState('tracking');
 
-        // En mode développement, utiliser la simulation
         if (this.isDevelopment) {
             console.log('Mode développement: démarrage de la simulation GPS');
             this.startSimulation();
         } else {
-            // En production, utiliser le vrai GPS
             this.watchId = navigator.geolocation.watchPosition(
                 (position) => this.handlePositionUpdate(position),
                 (error) => console.error('Erreur GPS:', error),
@@ -417,7 +411,6 @@ class ActivityTracking {
         if (!this.activity?.parcoursId) return;
 
         try {
-            // Récupérer le parcours depuis le localStorage
             const parcours = JSON.parse(localStorage.getItem('parcours') || '[]')
                 .find((p: any) => p.id === this.activity?.parcoursId);
 
@@ -426,17 +419,14 @@ class ActivityTracking {
                 return;
             }
 
-            // Trouver le point le plus proche sur le parcours prévu
             const closestPoint = this.findClosestPointOnRoute(currentPosition, parcours.points);
             
-            // Correction ici : on passe un tableau contenant les deux points
             const distance = this.calculateDistance([currentPosition, closestPoint]);
 
             console.log('Distance de déviation:', distance * 1000, 'mètres');
 
-            // Si la distance est supérieure au seuil
             if (distance * 1000 > this.deviationThreshold) {
-                showToast('Attention: Vous vous éloignez du parcours prévu!', 'warning');
+                // showToast('Attention: Vous vous éloignez du parcours prévu!', 'warning');
                 
                 if (this.actualRoute) {
                     this.actualRoute.setStyle({ color: 'red' });
@@ -475,25 +465,20 @@ class ActivityTracking {
         if (!this.activity?.id || !this.tracking) return;
 
         const currentTime = Date.now();
-        // Calculer la durée en excluant le temps de pause
         const duration = currentTime - this.startTime - this.pausedTime;
         
-        // Utiliser la distance totale accumulée
         const currentDistance = this.calculateDistance();
         const totalDistance = this.totalDistance + currentDistance;
         const speed = this.calculateSpeed(totalDistance, duration);
         const calories = this.calculateCalories(totalDistance, duration);
 
-        // Mise à jour de l'affichage
         this.updateDisplay(totalDistance, duration, speed, calories);
 
-        // Mise à jour des informations de progression
         const currentPosition = this.positions[this.positions.length - 1];
         if (currentPosition) {
             this.updateActivityProgress(totalDistance, speed, calories);
         }
 
-        // Calculer le pourcentage de progression
         if (this.activity.distance > 0) {
             const progress = (totalDistance / this.activity.distance) * 100;
             this.updateProgressBar(progress);
@@ -502,7 +487,6 @@ class ActivityTracking {
 
     private calculateDistance(points?: [number, number][]): number {
         if (points) {
-            // Vérifier que nous avons bien deux points
             if (points.length !== 2) {
                 console.warn('Nombre de points incorrect pour le calcul de distance', points);
                 return 0;
@@ -510,7 +494,6 @@ class ActivityTracking {
             return this.getDistanceBetweenPoints(points[0], points[1]);
         }
 
-        // Calcul de la distance totale du parcours
         if (this.positions.length < 2) return 0;
 
         let total = 0;
@@ -527,8 +510,7 @@ class ActivityTracking {
         }
 
         try {
-            // Formule de Haversine pour calculer la distance entre deux points GPS
-            const R = 6371; // Rayon de la Terre en km
+            const R = 6371; 
             const dLat = this.toRad(p2[0] - p1[0]);
             const dLon = this.toRad(p2[1] - p1[1]);
             const lat1 = this.toRad(p1[0]);
@@ -549,15 +531,13 @@ class ActivityTracking {
     }
 
     private calculateSpeed(distance: number, duration: number): number {
-        // Vitesse en km/h
         return (distance / (duration / 3600000));
     }
 
     private calculateCalories(distance: number, duration: number): number {
-        // Calcul simplifié des calories (à adapter selon le type d'activité)
         const hours = duration / 3600000;
-        const MET = this.activity?.type === 'course' ? 8 : 4; // MET plus élevé pour la course
-        const weight = 70; // Poids moyen en kg (à personnaliser)
+        const MET = this.activity?.type === 'course' ? 8 : 4;
+        const weight = 70;
         return MET * weight * hours;
     }
 
@@ -631,10 +611,8 @@ class ActivityTracking {
     }
 }
 
-// Initialisation
 new ActivityTracking(); 
 
-// Ajouter du CSS pour les boutons
 const style = document.createElement('style');
 style.textContent = `
     .sim-speed {

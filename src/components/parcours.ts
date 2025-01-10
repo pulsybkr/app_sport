@@ -220,13 +220,11 @@ function generateId() {
     return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
 }
 
-// Fonction pour charger les parcours par type
 const loadParcoursByType = (type: string) => {
     const parcours = JSON.parse(localStorage.getItem('parcours') || '[]');
     return parcours.filter((p: any) => p.type === type);
 };
 
-// Fonction pour calculer la distance entre deux points GPS
 const calculateDistance = (lat1: number, lon1: number, lat2: number, lon2: number) => {
     const R = 6371; // Rayon de la Terre en km
     const dLat = (lat2 - lat1) * Math.PI / 180;
@@ -238,7 +236,6 @@ const calculateDistance = (lat1: number, lon1: number, lat2: number, lon2: numbe
     return R * c;
 };
 
-// Gestionnaire pour la création d'activité
 const initActivityCreation = () => {
     const typeSelect = document.getElementById('activity-type') as HTMLSelectElement;
     const parcoursSelect = document.getElementById('activity-parcours') as HTMLSelectElement;
