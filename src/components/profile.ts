@@ -1,7 +1,7 @@
 import { userService } from '../services/user.service.js';
 import { activityService } from '../services/activity.service.js';
 import { showToast } from '../toast.js';
-
+// import { Chart } from 'chart.js';
 class ProfileManager {
     private modals: {[key: string]: HTMLElement} = {};
     private mediaStream: MediaStream | null = null;
@@ -87,13 +87,11 @@ class ProfileManager {
 
             const activities = await activityService.getUserActivities(user.id);
             
-            // Calculer les statistiques
             const totalActivities = activities.length;
             const totalDistance = activities.reduce((sum, act) => sum + (act.currentDistance || 0), 0);
             const totalTime = activities.reduce((sum, act) => sum + (act.duration || 0), 0);
             const totalCalories = activities.reduce((sum, act) => sum + (act.calories || 0), 0);
 
-            // Mettre à jour l'affichage
             const elements = {
                 totalActivities: document.getElementById('total-activities'),
                 totalDistance: document.getElementById('total-distance'),
@@ -106,7 +104,6 @@ class ProfileManager {
             if (elements.totalTime) elements.totalTime.textContent = this.formatDuration(totalTime);
             if (elements.totalCalories) elements.totalCalories.textContent = `${Math.round(totalCalories)} kcal`;
 
-            // Créer les graphiques
             this.createActivityChart(activities);
             this.createDistanceChart(activities);
             this.displayRecentActivities(activities);
@@ -121,7 +118,6 @@ class ProfileManager {
         const ctx = document.getElementById('activities-chart') as HTMLCanvasElement;
         if (!ctx) return;
 
-        // Grouper les activités par semaine
         const weeklyData = this.groupActivitiesByWeek(activities);
 
         if (this.charts['activities']) {
@@ -232,7 +228,11 @@ class ProfileManager {
             .slice(0, 5);
 
         container.innerHTML = recentActivities.map(activity => `
-            <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+            <div class="activity-item flex items-center justify-between p-4 bg-gray-50 rounded-lg"
+                 data-activity-id="${activity.id}"
+                 data-type="${activity.type || 'course'}"
+                 data-distance="${activity.currentDistance}"
+                 data-duration="${activity.duration}">
                 <div>
                     <div class="font-semibold">${new Date(activity.date).toLocaleDateString()}</div>
                     <div class="text-sm text-gray-600">Distance: ${activity.currentDistance?.toFixed(2)} km</div>
@@ -240,6 +240,18 @@ class ProfileManager {
                 <div class="text-right">
                     <div class="text-sm">${this.formatDuration(activity.duration)}</div>
                     <div class="text-sm text-gray-600">${Math.round(activity.calories)} kcal</div>
+                </div>
+                <div class="flex space-x-2 ml-4">
+                    <button class="share-activity bg-green-500 text-white p-2 rounded-lg hover:bg-green-600" title="Partager">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"/>
+                        </svg>
+                    </button>
+                    <button class="duplicate-activity bg-blue-500 text-white p-2 rounded-lg hover:bg-blue-600" title="Dupliquer">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2"/>
+                        </svg>
+                    </button>
                 </div>
             </div>
         `).join('');
@@ -285,7 +297,7 @@ class ProfileManager {
             const cameraModal = document.createElement('div');
             cameraModal.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center';
             cameraModal.innerHTML = `
-                <div class="bg-white rounded-lg p-6">
+                <div class="bg-white rounded-lg p-6 w-[600px] h-[600px]">
                     <video id="camera-preview" autoplay playsinline class="mb-4 rounded-lg"></video>
                     <div class="flex justify-center space-x-4">
                         <button id="take-photo" class="bg-blue-500 text-white px-4 py-2 rounded-lg">

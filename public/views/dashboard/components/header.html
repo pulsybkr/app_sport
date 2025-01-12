@@ -2,6 +2,8 @@
     <div class="flex md:flex-col items-center gap-4 md:gap-8 w-full md:w-auto">
         <a href="/dashboard" class="font-bold text-lg md:block hidden">WeatherApp</a>
 
+        
+
         <div class="w-full md:w-auto px-4 md:px-0">
             <ul class="flex md:flex-col gap-4 md:gap-9 w-full md:w-auto justify-between">
                 <li >
@@ -40,7 +42,10 @@
                     <p class="hidden md:block">Profile</p>
                 </a>
             </li>
-            <!-- <li class="flex cursor-pointer items-center gap-4 font-bold text-[#616161]" onclick="window.location.href = '/notification'"><img class="w-6 h-6" src="./image/icons/notif.svg" alt="Settings"><p>Settings</p></li> -->
+            <button id="theme-toggle" 
+                class="p-2 rounded-lg bg-[#CFE1CA] hover:bg-[#E6F285] transition-colors duration-200"
+                aria-label="Changer le thème">
+        </button>
         </ul>
     </div>
 </nav>

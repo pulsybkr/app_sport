@@ -8,9 +8,7 @@ if (document.readyState === 'loading') {
         checkUserLoggedIn();
     });
 } else {
-    // Le DOM est déjà chargé
     console.log('middleware - DOM déjà chargé');
-    checkUserLoggedIn();
 }
 
 const main = document.getElementById('main');

@@ -1,10 +1,8 @@
 import { Router } from './core/Router.js';
 import { activityService } from './services/activity.service.js';
 // import L from 'leaflet';
-// Création du router comme une variable globale
 let router: Router;
 
-// Initialisation de l'application
 const initializeApp = (): void => {
   const root = document.getElementById('app');
   if (!root) throw new Error("Element 'app' non trouvé");
@@ -13,20 +11,17 @@ const initializeApp = (): void => {
   initializeRoutes();
 };
 
-// Ajout d'une fonction utilitaire pour charger une vue
 export const loadView = async (viewPath: string): Promise<string> => {
   const response = await fetch(viewPath);
   return await response.text();
 };
 
-// Ajout d'une fonction pour charger le header et une vue
 const loadHeaderAndView = async (viewPath: string): Promise<void> => {
   const headerContent = await loadView('./views/header.html');
   const content = await loadView(viewPath);
   document.getElementById('app')!.innerHTML = headerContent + content;
 };
 
-// Configuration des routes simplifiée
 const initializeRoutes = async (): Promise<void> => {
   router.addRoute('/', async () => {
     await loadHeaderAndView('./views/home.html');
@@ -52,7 +47,7 @@ const initializeRoutes = async (): Promise<void> => {
     const content = await loadView('./views/dashboard/dashboard.html');
     const header = await loadView('./views/dashboard/components/header.html');
     document.getElementById('app')!.innerHTML = header + content;
-    loadPageScript('../dist/auth/middleware.js');
+    // loadPageScript('../dist/auth/middleware.js');
     loadPageScript('../dist/components/mapHeader.js');
     loadPageScript('../dist/core/meteo.js');
   });
@@ -98,7 +93,8 @@ router.addRoute('/profile', async () => {
 
     await Promise.all([
         loadPageScript('../dist/auth/middleware.js'),
-        loadPageScript('../dist/components/profile.js')
+        loadPageScript('../dist/components/profile.js'),
+        loadPageScript('../dist/components/share-copy.js')
     ]);
   } catch (error) {
     console.error('Erreur lors du chargement de la page profile:', error);
@@ -106,7 +102,6 @@ router.addRoute('/profile', async () => {
   });
 };
 
-// Modifier la fonction loadPageScript pour retourner une Promise
 const loadPageScript = (scriptPath: string): Promise<void> => {
   return new Promise((resolve, reject) => {
     const script = document.createElement('script');

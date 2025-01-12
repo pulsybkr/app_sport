@@ -25,9 +25,13 @@ class ActivityTracking {
     private readonly WALKING_SPEED = 5.4; // vitesse moyenne de marche en m/s (environ 5 km/h)
     private currentSimulatedPosition: [number, number] = [0, 0];
     private lastSimulationTime: number = 0;
+    private prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+    private themeToggleBtn: HTMLElement | null = null;
+    private fullscreenBtn: HTMLElement | null = null;
 
     constructor() {
         this.initializeActivity();
+        this.initializeFullscreenButton();
     }
 
     private async initializeActivity() {
@@ -124,14 +128,11 @@ class ActivityTracking {
                 weight: 3
             }).addTo(this.map);
 
-            // Charger et afficher le parcours prévu
             await this.loadPlannedRoute();
 
-            // Centrer la carte sur le début du parcours
             if (this.activity?.coordinates && this.activity.coordinates.length > 0) {
                 this.map.setView(this.activity.coordinates[0], 15);
             } else {
-                // Sinon, centrer sur la position actuelle
                 await this.centerOnCurrentPosition();
             }
 
@@ -285,8 +286,9 @@ class ActivityTracking {
                         heading: null,
                         speed: speed
                     },
-                    timestamp: currentTime
-                };
+                    timestamp: currentTime,
+                    toJSON: function() { return this; }
+                } as GeolocationPosition;
 
                 this.handlePositionUpdate(position);
                 this.lastSimulationTime = currentTime;
@@ -608,6 +610,63 @@ class ActivityTracking {
                 progressBar.setAttribute('aria-valuenow', progress.toString());
             }
         });
+    }
+
+    private initializeFullscreenButton() {
+        // Créer le bouton de plein écran
+        const header = document.getElementById('activity-header');
+        if (!header) return;
+
+        const buttonContainer = header.querySelector('.flex.gap-2');
+        if (!buttonContainer) return;
+
+        this.fullscreenBtn = document.createElement('button');
+        this.fullscreenBtn.className = 'bg-[#CFE1CA] hover:bg-[#E6F285] text-black px-4 md:px-6 py-2 rounded-lg flex-1 md:flex-none transition-colors duration-200';
+        this.fullscreenBtn.innerHTML = `
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"/>
+            </svg>
+        `;
+        this.fullscreenBtn.setAttribute('aria-label', 'Mode plein écran');
+
+        // Ajouter l'événement click
+        this.fullscreenBtn.addEventListener('click', () => this.toggleFullscreen());
+
+        // Ajouter le bouton au conteneur
+        buttonContainer.insertBefore(this.fullscreenBtn, buttonContainer.firstChild);
+
+        // Écouter les changements d'état du plein écran
+        document.addEventListener('fullscreenchange', () => this.updateFullscreenButton());
+    }
+
+    private toggleFullscreen() {
+        if (!document.fullscreenElement) {
+            // Passer en plein écran
+            document.documentElement.requestFullscreen().catch(err => {
+                console.error(`Erreur lors du passage en plein écran : ${err.message}`);
+            });
+        } else {
+            // Quitter le plein écran
+            document.exitFullscreen().catch(err => {
+                console.error(`Erreur lors de la sortie du plein écran : ${err.message}`);
+            });
+        }
+    }
+
+    private updateFullscreenButton() {
+        if (!this.fullscreenBtn) return;
+
+        const isFullscreen = !!document.fullscreenElement;
+        
+        this.fullscreenBtn.innerHTML = isFullscreen ? `
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+            </svg>
+        ` : `
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"/>
+            </svg>
+        `;
     }
 }
 

@@ -39,8 +39,10 @@ export class UserService extends DatabaseCore {
             return index.get(email);
         }).then(async (user: User | null) => {
             if (user && user.password && await PasswordService.comparePassword(password, user.password)) {
-                setCookie('sessionId', user.id, { secure: true });
-                return user;
+                if (user.id) {
+                    setCookie('sessionId', user.id, { secure: true });
+                    return user;
+                }
             }
             return null;
         });

@@ -1,19 +1,28 @@
 <main class="h-screen z-0 ml-[175px] px-16 pt-4">
     <div class="max-w-4xl mx-auto">
-        <h1 class="text-3xl font-bold mb-8">Profil</h1>
-        
+        <div class="flex justify-between items-center">
+            <h1 class="text-3xl font-bold mb-8">Profil</h1>
+            <button id="theme-toggle"
+                class="fixed top-4 right-4 p-2 rounded-lg 
+                       bg-gray-200 dark:bg-gray-700 
+                       hover:bg-gray-300 dark:hover:bg-gray-600 
+                       transition-colors duration-200
+                       focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                aria-label="Changer le thème">
+            </button>
+        </div>
         <!-- Informations de base -->
         <div class="bg-white rounded-lg shadow-md p-6 mb-6">
             <div class="flex items-center space-x-6">
                 <div class="relative">
-                    <img id="profile-image" 
-                         src="/assets/default-avatar.png" 
-                         alt="Photo de profil" 
-                         class="w-32 h-32 rounded-full object-cover">
-                    <button id="change-photo" 
-                            class="absolute bottom-0 right-0 bg-blue-500 text-white p-2 rounded-full hover:bg-blue-600">
+                    <img id="profile-image" src="/assets/default-avatar.png" alt="Photo de profil"
+                        class="w-32 h-32 rounded-full object-cover">
+                    <button id="change-photo"
+                        class="absolute bottom-0 right-0 bg-blue-500 text-white p-2 rounded-full hover:bg-blue-600">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"></path>
+                            <path
+                                d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z">
+                            </path>
                             <path d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"></path>
                         </svg>
                     </button>
@@ -22,8 +31,7 @@
                     <h2 id="user-name" class="text-2xl font-semibold mb-2">Nom d'utilisateur</h2>
                     <p id="user-email" class="text-gray-600">email@example.com</p>
                 </div>
-                <button id="edit-profile" 
-                        class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600">
+                <button id="edit-profile" class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600">
                     Modifier le profil
                 </button>
             </div>
@@ -67,7 +75,28 @@
         <div class="bg-white rounded-lg shadow-md p-6">
             <h3 class="text-lg font-semibold mb-4">Dernières activités</h3>
             <div id="recent-activities" class="space-y-4">
-                <!-- Les activités seront injectées ici -->
+                <!-- Template pour chaque activité -->
+                <div class="activity-item flex items-center justify-between p-4 border rounded-lg">
+                    <div class="flex-1">
+                        <!-- Contenu existant de l'activité -->
+                    </div>
+                    <div class="flex space-x-2">
+                        <button class="share-activity bg-green-500 text-white p-2 rounded-lg hover:bg-green-600"
+                            title="Partager">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
+                            </svg>
+                        </button>
+                        <button class="duplicate-activity bg-blue-500 text-white p-2 rounded-lg hover:bg-blue-600"
+                            title="Dupliquer">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -75,8 +104,7 @@
         <div class="bg-white rounded-lg shadow-md p-6">
             <h3 class="text-lg font-semibold mb-4">Sécurité</h3>
             <div class="flex gap-4">
-                <button id="change-password" 
-                    class="bg-gray-500 text-white px-4 py-2 rounded-lg hover:bg-gray-600">
+                <button id="change-password" class="bg-gray-500 text-white px-4 py-2 rounded-lg hover:bg-gray-600">
                     Changer le mot de passe
                 </button>
                 <button id="logout" class="bg-red-500 text-white px-4 py-2  rounded-lg hover:bg-red-600">
@@ -112,7 +140,8 @@
     </div>
 
     <!-- Modal de changement de mot de passe -->
-    <div id="change-password-modal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+    <div id="change-password-modal"
+        class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
         <div class="bg-white rounded-lg p-6 w-96">
             <h2 class="text-xl font-semibold mb-4">Changer le mot de passe</h2>
             <form id="change-password-form">
@@ -139,4 +168,33 @@
             </form>
         </div>
     </div>
-</div> 
+
+    <!-- Modal de partage -->
+    <div id="share-modal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+        <div class="bg-white rounded-lg p-6 w-96">
+            <h2 class="text-xl font-semibold mb-4">Partager l'activité</h2>
+            <div class="mb-4">
+                <label class="block text-gray-700 mb-2">Lien de partage</label>
+                <div class="flex">
+                    <input type="text" id="share-link" class="flex-1 border rounded-l-lg px-3 py-2" readonly>
+                    <button id="copy-link" class="bg-blue-500 text-white px-4 py-2 rounded-r-lg hover:bg-blue-600">
+                        Copier
+                    </button>
+                </div>
+            </div>
+            <div class="flex justify-center space-x-4">
+                <button class="share-facebook bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">
+                    Facebook
+                </button>
+                <button class="share-twitter bg-blue-400 text-white px-4 py-2 rounded-lg hover:bg-blue-500">
+                    Twitter
+                </button>
+                <button class="cancel-modal bg-gray-500 text-white px-4 py-2 rounded-lg hover:bg-gray-600">
+                    Fermer
+                </button>
+            </div>
+        </div>
+    </div>
+
+
+    </div>

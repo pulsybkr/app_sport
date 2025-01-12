@@ -2,6 +2,55 @@
 @tailwind components;
 @tailwind utilities; 
 
+:root {
+    --primary-bg: #ffffff;
+    --primary-text: #000000;
+    --primary-accent: #CFE1CA;
+    --secondary-accent: #E6F285;
+    --nav-bg: #CFE1CA;
+    --card-bg: #ffffff;
+}
+
+/* Styles globaux */
+body {
+    background-color: var(--primary-bg);
+    color: var(--primary-text);
+}
+
+/* Navigation */
+nav {
+    background-color: var(--nav-bg);
+}
+
+/* Cartes et conteneurs */
+.bg-white {
+    background-color: var(--card-bg);
+}
+
+/* Boutons principaux */
+.bg-\[\#E6F285\] {
+    background-color: var(--secondary-accent);
+}
+
+.bg-\[\#CFE1CA\] {
+    background-color: var(--primary-accent);
+}
+
+/* Mode sombre */
+.dark {
+    --primary-bg: #1a1a1a;
+    --primary-text: #ffffff;
+    --primary-accent: #8BA888;
+    --secondary-accent: #A8B562;
+    --nav-bg: #2d2d2d;
+    --card-bg: #333333;
+}
+
+/* Transitions */
+* {
+    transition: background-color 0.3s, color 0.3s;
+}
+
 .toast {
     display: flex;
     justify-content: space-between;
